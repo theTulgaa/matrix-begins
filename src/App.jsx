@@ -153,9 +153,16 @@ function App() {
     
     let rank = 0;
     for (let i = 0; i < n; i++) {
-        if (matrix[i][m - 1] !== 0) {
-            rank++;
+      var checker = false;
+      for(let j = 0;j < m; j++){
+        if (matrix[i][j] !== 0) {
+          checker = true
         }
+      }
+      if(checker === true){
+        rank++;
+      }
+        
     }
     
     return rank;
@@ -168,7 +175,7 @@ function App() {
     let b = getCoef(row, column);
     let augmented_matrix = matrix.map(row => row.slice()); // Make a copy of the matrix
     for (let i = 0; i < matrix.length; i++) {
-        augmented_matrix[i].push(b[i]);
+      augmented_matrix[i].push(b[i]);
     }
 
     const rows = augmented_matrix.length;
@@ -198,7 +205,7 @@ function App() {
             for (let j = i + 1; j < rows; j++) {
                 const factor = augmented_matrix[j][i];
                 for (let k = i; k < cols; k++) {
-                    augmented_matrix[j][k] -= factor * augmented_matrix[i][k];
+                  augmented_matrix[j][k] -= factor * augmented_matrix[i][k];
                 }
             }
         }
@@ -252,29 +259,28 @@ function App() {
     const cols = matrix[0].length;
     const detA = detMatrix(matrix);
 
-    if (detA === 0) {
-      setFound(true)
-      setAnswer("NO SOLUTION!")
-        console.log(["No unique solution exists."]);
+    if (detA === 0 || rows != cols -2) {
+      setFound(true);
+      setAnswer(["NO SOLUTION!"]);
+      console.log(["No unique solution exists."]);
+      
     }
-
-    const solutions = [];
-
-    for (let i = 0; i < cols; i++) {
+    else{
+      const solutions = [];
+      for (let i = 0; i < cols; i++) {
         const mat = src_matrix.map(row => row.slice());
-       
-        
         for (let j = 0; j < rows; j++) {
-            mat[j][i] = b[j];
+          mat[j][i] = b[j];
         }
-         console.log(mat);
+        console.log(mat);
 
         const detMat = detMatrix(mat);
         solutions.push((detMat / detA).toFixed(2));
+      }
+      setFound(true);
+      setAnswer(solutions);
+      console.log(solutions);
     }
-    setFound(true)
-    setAnswer(solutions);
-    console.log(solutions);
   }
   const inverse = () => {
     console.log("INVERSE");
