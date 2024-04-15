@@ -285,17 +285,23 @@ function App() {
     let matrix1 = getElements(column);
     let matrix = inverseHelper(matrix1);
     let b = getCoef(row, column);
-    const solutions = [];
-    for (let i = 0; i < matrix.length; i++) {
+    if (row == column -1){
+      const solutions = [];
+      for (let i = 0; i < matrix.length; i++) {
         let Sum = 0;
         for (let j = 0; j < matrix[0].length; j++) {
             Sum += matrix[i][j] * b[j];
         }
         solutions.push(Sum.toFixed(2));
     }
-    setFound(true)
-    setAnswer(solutions);
-    console.log(solutions);
+      setFound(true)
+      setAnswer(solutions);
+      console.log(solutions)
+    }
+    else{
+      setFound(true)
+      setAnswer(["NO SOLUTION!"])
+    }
   }
   const restart = () => {
     setAnswer(false);
