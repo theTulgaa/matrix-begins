@@ -12,7 +12,6 @@ function App() {
     const [column, setColumn] = useState("");
     const [answer, setAnswer] = useState([]);
     const [found, setFound] = useState(false);
-    const [error, errorFound] = useState(false);
     const [screenSize, setScreenSize] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -168,7 +167,6 @@ function App() {
     return rank;
   }
 
-
   const gauss = () => {
     console.log("gauss");
     let matrix = getElements(column);
@@ -299,6 +297,13 @@ function App() {
     setAnswer(solutions);
     console.log(solutions);
   }
+  const restart = () => {
+    setAnswer(false);
+    setFound(false);
+    setColumn("")
+    setRow("")
+
+  }
   return (
     <>
     <div className='outter-container'>
@@ -333,6 +338,9 @@ function App() {
         <button onClick={cramer}>CRAMER</button>
         <button onClick={gauss}>GAUSS</button>
         <button onClick={inverse}>INVERSE</button>
+      </div>
+      <div className='d-flex justify-content-center align-items-center mt-5'>
+        <button className='border rounded p-3' onClick={restart}>RESTART</button>
       </div>
     </div>
     </>
