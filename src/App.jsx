@@ -256,6 +256,7 @@ function App() {
     const rows = matrix.length;
     const cols = matrix[0].length;
     const detA = detMatrix(matrix);
+    console.log(detA)
 
     if (detA === 0 || rows != cols -2) {
       setFound(true);
@@ -348,6 +349,3 @@ function App() {
 }
 
 export default App
-/*
-llllllll
-*/
