@@ -1,0 +1,17 @@
+.btns-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 5px;
+    column-gap: 5px;
+    margin-top: 10px;
+}
+.mat-con {
+    padding: 5px;
+}
+.btns-container button {
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: pink;
+}

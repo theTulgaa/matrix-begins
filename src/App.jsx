@@ -5,6 +5,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { NewCon } from './NewCon';
 
 function App() {
 
@@ -257,7 +258,7 @@ function App() {
     const cols = matrix[0].length;
     const detA = detMatrix(matrix);
 
-    if (detA === 0 || rows != cols -2) {
+    if (detA === 0 || row != column - 1) {
       setFound(true);
       setAnswer(["NO SOLUTION!"]);
       console.log(["No unique solution exists."]);
@@ -349,6 +350,7 @@ function App() {
         <button className='border rounded p-3' onClick={restart}>RESTART</button>
       </div>
     </div>
+    <NewCon />
     </>
   )
 }
