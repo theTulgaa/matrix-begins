@@ -5,6 +5,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { NewCon } from './NewCon';
 
 function App() {
 
@@ -258,7 +259,7 @@ function App() {
     const detA = detMatrix(matrix);
     console.log(detA)
 
-    if (detA === 0 || rows != cols -2) {
+    if (detA === 0 || row != column - 1) {
       setFound(true);
       setAnswer(["NO SOLUTION!"]);
       console.log(["No unique solution exists."]);
@@ -286,17 +287,23 @@ function App() {
     let matrix1 = getElements(column);
     let matrix = inverseHelper(matrix1);
     let b = getCoef(row, column);
-    const solutions = [];
-    for (let i = 0; i < matrix.length; i++) {
+    if (row == column -1){
+      const solutions = [];
+      for (let i = 0; i < matrix.length; i++) {
         let Sum = 0;
         for (let j = 0; j < matrix[0].length; j++) {
             Sum += matrix[i][j] * b[j];
         }
         solutions.push(Sum.toFixed(2));
     }
-    setFound(true)
-    setAnswer(solutions);
-    console.log(solutions);
+      setFound(true)
+      setAnswer(solutions);
+      console.log(solutions)
+    }
+    else{
+      setFound(true)
+      setAnswer(["NO SOLUTION!"])
+    }
   }
   const restart = () => {
     setAnswer(false);
@@ -344,6 +351,7 @@ function App() {
         <button className='border rounded p-3' onClick={restart}>RESTART</button>
       </div>
     </div>
+    <NewCon />
     </>
   )
 }
