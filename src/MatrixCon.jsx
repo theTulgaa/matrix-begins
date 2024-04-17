@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import "./MatrixCon.css"
 import rank from "./algorithms/Rank";
 
+
 export const MatrixCon = ({ title, rows, cols, maxRow, maxCol, className, showButtons}) => {
   const [row, setRow] = useState(rows)
   const [column, setColumn] = useState(cols)
@@ -105,11 +106,12 @@ export const MatrixCon = ({ title, rows, cols, maxRow, maxCol, className, showBu
   const calculateRank = () => {
     const matrix = getElements1(column);
     const answer = rank(matrix);
-    alert(matrix);
+    alert(answer);
     console.log(matrix)
     console.log(column)
 
   }
+  
   return (
     <div className='bg-danger mat-con'>
       <h3 className='text-center'>{title}</h3>

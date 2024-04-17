@@ -119,7 +119,7 @@ function App() {
     const n = A.length;
     const augmented = [];
     for (let i = 0; i < n; i++) {
-        augmented.push([...A[i], ...(new Array(n).fill(0).map((_, index) => index === i ? 1 : 0))]);
+      augmented.push([...A[i], ...(new Array(n).fill(0).map((_, index) => index === i ? 1 : 0))]);
     }
     for (let i = 0; i < n; i++) {
         augmented[i] = augmented[i].map(val => val / augmented[i][i]);
