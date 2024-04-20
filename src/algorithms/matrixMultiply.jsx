@@ -1,4 +1,4 @@
-// can multiply if matrixA_cols = matrixB_rows
+// if matrixA_cols = matrixB_rows, will can multiply 
 // final matrix will be [matrixA_rows x matrixB_cols]
 export const multiplication = (matrixA, matrixB) => {
     const numRowsA = matrixA.length;
@@ -18,6 +18,7 @@ export const multiplication = (matrixA, matrixB) => {
             }
         }
     }
+    
 
     return multiply_matrix;
 }

@@ -1,5 +1,5 @@
 
-export const matrixSum = (matrixA, matrixB) => {
+export const difference = (matrixA, matrixB) => {
     const rowA = matrixA.length;
     const rowB = matrixB.length;
     const colA = matrixA[0].length;
@@ -8,12 +8,12 @@ export const matrixSum = (matrixA, matrixB) => {
         return null;
     }
     
-    const sumMatrix = Array.from({ length: rowA }, () => Array(rowA).fill(0));
+    const final = Array.from({ length: rowA }, () => Array(rowA).fill(0));
     for(let i=0;i<rowA;i++){
         for(let j=0;j<colA;j++){
-            sumMatrix[i][j] = matrixA[i][j] + matrixB[i][j];
+            final[i][j] = matrixA[i][j] - matrixB[i][j];
         }
     }
 
-    return sumMatrix
+    return final
 }
