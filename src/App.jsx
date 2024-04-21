@@ -9,11 +9,11 @@ import { NewCon } from './NewCon';
 
 function App() {
 
-    const [row, setRow] = useState("");
-    const [column, setColumn] = useState("");
-    const [answer, setAnswer] = useState([]);
-    const [found, setFound] = useState(false);
-    const [screenSize, setScreenSize] = useState(window.innerWidth);
+  const [row, setRow] = useState("");
+  const [column, setColumn] = useState("");
+  const [answer, setAnswer] = useState([]);
+  const [found, setFound] = useState(false);
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
 
   useEffect(() => {
     const handleResize = () => {
@@ -181,6 +181,7 @@ function App() {
     const cols = augmented_matrix[0].length;
     
     if(rank(matrix) != rank(augmented_matrix)){
+      alert('Error : Basic and augmented matrix ranks are not equal!!!');
       setFound(true)
       setAnswer(["SOMETHING WENT WRONG"]);
         console.log('Unsolution !!!. Because source matrix rank != augmented matrix rank ');
@@ -260,6 +261,7 @@ function App() {
     console.log(detA)
 
     if (detA === 0 || row != column - 1) {
+      console.log(row,column)
       setFound(true);
       setAnswer(["NO SOLUTION!"]);
       console.log(["No unique solution exists."]);
