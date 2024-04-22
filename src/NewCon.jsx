@@ -22,7 +22,7 @@ export const NewCon = () => {
     console.log(matrixInfo[1]);
   };
 
-  const getElements = (column, inputs) => {
+  const getElements2 = (column, inputs) => {
     let final_matrix = [];
     let counter = 0;
     let inner = [];
@@ -53,9 +53,8 @@ export const NewCon = () => {
   const getMatrixes = () => {
     const inputA = document.querySelectorAll('.matrix1');
     const inputB = document.querySelectorAll('.matrix2');
-    const matrixA = getElements(matrixInfo[0].column, inputA);
-    const matrixB = getElements(matrixInfo[2].column, inputB);
-
+    const matrixA = getElements2(matrixInfo[0].column, inputA);
+    const matrixB = getElements2(matrixInfo[2].column, inputB);
     return [matrixA, matrixB];
 
   }
@@ -63,7 +62,7 @@ export const NewCon = () => {
 
   const calculate_Multifly = () => {
     const [matrixA, matrixB] = getMatrixes();
-
+    console.log(matrixA,matrixB);
     const answer = multiplication(matrixA,matrixB);
     if (answer === null) {
       alert('Error: Unable to calculate matrix multifly');
@@ -134,7 +133,7 @@ const calculate_Difference = () => {
     <div style={{ height: "100vh", width: "100%" }} className='main-container'>
       <div className=""><MatrixCon title={"MATRIX A"} rows={3} cols={3} maxRow={9} maxCol={9} className={"matrix1"} showButtons={true} sendMatrixInfo={(row, column) => handleMatrixInfo(0, row, column)} /></div>
       <div>
-        <MatrixCon title={"FINAL MATRIX"} rows={finalrow} cols={finalcol} maxRow={9} maxCol={9} className={"final-matrix"} showButtons={false} sendMatrixInfo={(row, column) => handleMatrixInfo(1, row, column)} />
+        <MatrixCon title={"FINAL MATRIX"} rows={3} cols={3} maxRow={9} maxCol={9} className={"final-matrix"} showButtons={false} sendMatrixInfo={(row, column) => handleMatrixInfo(1, row, column)} middle={true} myrow={finalrow} mycol={finalcol}/>
         <div className='final-matrix-div'>
           <button onClick={calculate_Sum_matrix}>A + B</button>
           <button onClick={calculate_Difference}>A - B</button>

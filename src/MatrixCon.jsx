@@ -1,8 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import "./MatrixCon.css";
+import './App.css'
 import rank from "./algorithms/Rank";
+import deter from "./algorithms/determinant";
+import inv from "./algorithms/inverse";
+import inv_solution from "./algorithms/inverse_solutions";
+import crammer from "./algorithms/crammer_rule";
+import gauss from "./algorithms/gauss_solutions";
 
-export const MatrixCon = ({ title, rows, cols, maxRow, maxCol, className, showButtons, sendMatrixInfo }) => {
+export const MatrixCon = ({ title, rows, cols, maxRow, maxCol, className, showButtons, sendMatrixInfo, middle, myrow, mycol }) => {
+
+  const [answer, setAnswer] = useState([]);
+  const [found, setFound] = useState(false);
+
+  useEffect(() => {
+    if (middle) {
+      console.log('Row:', myrow, 'Col:', mycol);
+      setRow(myrow)
+      setColumn(mycol)
+    }
+  }, [myrow, mycol]);
   const [row, setRow] = useState(rows);
   const [column, setColumn] = useState(cols);
   useEffect(() => {
@@ -93,12 +110,88 @@ export const MatrixCon = ({ title, rows, cols, maxRow, maxCol, className, showBu
     return final_matrix.map(array => array.slice(0, -1));
   };
 
+  const getCoef = (row, column) => {
+    const inputs = document.querySelectorAll(`.${className}`);
+    const coef = [];
+    inputs.forEach(val => {
+      let myval = parseFloat(val.value)
+      coef.push(myval);
+    })
+    let count = column - 1;
+    let ar = [];
+    for (let i = 0; i < row; i++)
+    {
+        ar.push(coef[count]);
+        count += parseInt(column);
+    }
+    return ar
+  }
+
   const calculateRank = () => {
     const matrix = getElements1(column);
     const answer = rank(matrix);
     alert(answer);
     console.log(matrix);
     console.log(column);
+  };
+  const calculateDet = () => {
+    const matrix = getElements1(column);
+    const answer = deter(matrix);
+    console.log(matrix)
+    alert(answer);
+  };
+  const calculateInv = () => {
+    const matrix = getElements1(column);
+    const answer = inv(matrix);
+    console.log(matrix)
+    alert(answer);
+  };
+  const calculateInv_solution = () => {
+    const matrix = getElements1(column);
+    const coef = getCoef(row,column);
+    const answer = inv_solution(matrix,coef);
+    if(answer === null){
+      setFound(true);
+      setAnswer(["NO SOLUTION!"]);
+    }
+    else{
+      console.log(matrix)
+      setFound(true);
+      setAnswer(answer);
+    }
+    
+  };
+  const calculate_Crammer = () => {
+    const matrix = getElements1(column);
+    const coef = getCoef(row,column);
+    const answer = crammer(matrix,coef);
+    if(answer === null){
+      setFound(true);
+      setAnswer(["NO SOLUTION!"]);
+    }
+    else{
+      console.log(matrix)
+      setFound(true);
+      setAnswer(answer);
+    }
+    
+  };
+  const calculate_Gauss = () => {
+    const matrix = getElements1(column);
+    const coef = getCoef(row,column);
+    const answer = gauss(matrix,coef);
+    if(answer === null){
+      alert();
+      setFound(true);
+      setAnswer(["Error : Basic and augmented matrix ranks are not equal!!!\nSOMETHING WENT WRONG"]);
+    }
+    else{
+      console.log(matrix)
+      setFound(true);
+      setAnswer(answer);
+      
+    }
+    
   };
 
   return (
@@ -114,10 +207,16 @@ export const MatrixCon = ({ title, rows, cols, maxRow, maxCol, className, showBu
           <button className="" onClick={handleRowMinus}>ROW-</button>
           <button className="" onClick={handleColumnMinus}>COL-</button>
           <button className="" onClick={calculateRank}>RANK</button>
-          <button className="">DET</button>
-          <button className="">INV</button>
+          <button className="" onClick={calculateDet}>DET</button>
+          <button className="" onClick={calculateInv}>INV</button>
+          <button className="" onClick={calculateInv_solution}>INVERSE SOLUTION</button>
+          <button className="" onClick={calculate_Gauss}>GAUSS</button>
+          <button className="" onClick={calculate_Crammer}>CRAMMER</button>
         </div>
       ) : null}
+      <div>
+        {found ? <div className='bg-primary mt-4 border rounded p-3'><h1 className='text-center'>Answer: {answer.map(item => String(item)).join(' : ')}</h1></div>: null}
+      </div>
     </div>
   );
 };
