@@ -5,7 +5,7 @@
     background-color: black;
     background-image: url("https://st.depositphotos.com/1434772/3491/i/450/depositphotos_34910907-stock-photo-matrix-background.jpg");
     background-repeat: no-repeat;
-    overflow: hidden;
+    /* overflow: hidden; */
     background-size: cover;
     padding: 10px;
     row-gap: 5px;
