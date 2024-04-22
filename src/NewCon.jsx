@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { MatrixCon } from './MatrixCon';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./NewCon.css";
 import {multiplication} from './algorithms/matrixMultiply';
 import {matrixSum} from './algorithms/matrixSum';
@@ -10,16 +11,17 @@ export const NewCon = () => {
   const [finalrow, setFinalrow] = useState(3)
   const [finalcol, setFinalcol] = useState(3)
 
+
+  useEffect(() => {
+    document.title = "MATRIX CALCULATOR";
+  });
+
   const handleMatrixInfo = (index, row, column) => {
     setMatrixInfo(prevInfo => {
       const updatedInfo = [...prevInfo];
       updatedInfo[index] = { row, column };
       return updatedInfo;
     });
-  };
-
-  const logMatrixInfo = () => {
-    console.log(matrixInfo[1]);
   };
 
   const getElements2 = (column, inputs) => {
@@ -68,50 +70,40 @@ export const NewCon = () => {
       alert('Error: Unable to calculate matrix multifly');
       return;
     }
-
     setFinalrow(answer.length);
     setFinalcol(answer[0].length);
-    console.log(finalrow, finalcol);
+    console.log(answer);
     const intoData = answer.flat();
     intoFinalData(intoData);
-
   }
 
   const calculate_Sum_matrix = () => {
 
     const [matrixA, matrixB] = getMatrixes();
-
-    if (matrixA === null || matrixB === null) {
-        alert('Error: Unable to fetch matrix data');
-        return;
-    }
-
     const answer = matrixSum(matrixA, matrixB);
 
     if (answer === null) {
-        alert('Error: Unable to calculate matrix sum');
-        return;
+      alert('Error: Unable to calculate matrix sum');
+      return;
     }
+    
     const intoData = answer.flat();
     setFinalrow(answer.length);
     setFinalcol(answer[0].length);
     intoFinalData(intoData);
     console.log(answer);
+    
+    
 }
 
 const calculate_Difference = () => {
 
   const [matrixA, matrixB] = getMatrixes();
 
-  if (matrixA === null || matrixB === null) {
-      alert('Error: Unable to fetch matrix data');
-      return;
-  }
-
   const answer = difference(matrixA, matrixB);
 
   if (answer === null) {
-      alert('Error: Unable to calculate matrix sum');
+      alert('Error: Unable to calculate matrix difference');
       return;
   }
   setFinalrow(answer.length);
@@ -142,9 +134,6 @@ const calculate_Difference = () => {
         </div>
       </div>
       <div className=""><MatrixCon title={"MATRIX B"} rows={3} cols={3} maxRow={9} maxCol={9} className={"matrix2"} showButtons={true} sendMatrixInfo={(row, column) => handleMatrixInfo(2, row, column)} /></div>
-      <div>
-        <button onClick={logMatrixInfo}>Get Row and Column Info</button>
-      </div>
     </div>
   );
 };

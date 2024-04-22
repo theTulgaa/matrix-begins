@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import "./MatrixCon.css";
-import './App.css'
 import rank from "./algorithms/Rank";
 import deter from "./algorithms/determinant";
 import inv from "./algorithms/inverse";
@@ -126,7 +125,6 @@ export const MatrixCon = ({ title, rows, cols, maxRow, maxCol, className, showBu
     }
     return ar
   }
-
   const calculateRank = () => {
     const matrix = getElements1(column);
     const answer = rank(matrix);
@@ -138,13 +136,26 @@ export const MatrixCon = ({ title, rows, cols, maxRow, maxCol, className, showBu
     const matrix = getElements1(column);
     const answer = deter(matrix);
     console.log(matrix)
-    alert(answer);
+    if(row != column -1){
+      alert('Since the last column is a weak member, it is not used for determinant !');
+    }
+    else{
+      alert(['Determinant :',answer]);
+    }
+    
   };
   const calculateInv = () => {
     const matrix = getElements1(column);
     const answer = inv(matrix);
-    console.log(matrix)
-    alert(answer);
+    const array = answer.flat();
+    if(row != column -1){
+      alert('Since the last column is a weak member, it is not used for inversion !');
+    }
+    else{
+      const formatedArray = array.map((sol) => sol.toFixed(2));
+      setFound(true);
+      setAnswer(formatedArray);
+    }  
   };
   const calculateInv_solution = () => {
     const matrix = getElements1(column);
@@ -181,7 +192,6 @@ export const MatrixCon = ({ title, rows, cols, maxRow, maxCol, className, showBu
     const coef = getCoef(row,column);
     const answer = gauss(matrix,coef);
     if(answer === null){
-      alert();
       setFound(true);
       setAnswer(["Error : Basic and augmented matrix ranks are not equal!!!\nSOMETHING WENT WRONG"]);
     }

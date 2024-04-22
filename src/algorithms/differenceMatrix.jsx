@@ -4,7 +4,7 @@ export const difference = (matrixA, matrixB) => {
     const rowB = matrixB.length;
     const colA = matrixA[0].length;
     const colB = matrixB[0].length;
-    if(rowA != rowB && colA != colB){
+    if(rowA != rowB || colA != colB){
         return null;
     }
     
