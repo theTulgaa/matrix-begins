@@ -122,7 +122,8 @@ const calculate_Difference = () => {
     });
   }
   return (
-    <div style={{ height: "100vh", width: "100%" }} className='main-container'>
+    <div className=''>
+       <div style={{ height: "150vh", width: "100%" }} className='main-container'>
       <div className=""><MatrixCon title={"MATRIX A"} rows={3} cols={3} maxRow={9} maxCol={9} className={"matrix1"} showButtons={true} sendMatrixInfo={(row, column) => handleMatrixInfo(0, row, column)} /></div>
       <div>
         <MatrixCon title={"FINAL MATRIX"} rows={3} cols={3} maxRow={9} maxCol={9} className={"final-matrix"} showButtons={false} sendMatrixInfo={(row, column) => handleMatrixInfo(1, row, column)} middle={true} myrow={finalrow} mycol={finalcol}/>
@@ -135,5 +136,7 @@ const calculate_Difference = () => {
       </div>
       <div className=""><MatrixCon title={"MATRIX B"} rows={3} cols={3} maxRow={9} maxCol={9} className={"matrix2"} showButtons={true} sendMatrixInfo={(row, column) => handleMatrixInfo(2, row, column)} /></div>
     </div>
+    </div>
+   
   );
 };
